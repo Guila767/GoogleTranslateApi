@@ -166,8 +166,10 @@ namespace GoogleTranslateApi
         public string Text(string text)
         {
             text = Download(text);
-            Block block = new Block(text);
-            return block[0][0][0].Data[0].ToString();
+            Block Datablock = (new Block(text))[0][0][0];
+            //string Source = Datablock.Data[1] == null ? string.Empty : Datablock.Data[1].ToString();
+            string Dest = Datablock.Data[0] == null ? string.Empty : Datablock.Data[0].ToString();
+            return Dest;
         }
     }
 }
