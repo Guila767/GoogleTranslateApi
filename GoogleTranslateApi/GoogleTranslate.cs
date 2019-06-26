@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +6,125 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Net;
 using System.ComponentModel;
+using System.IO;
 
 namespace GoogleTranslateApi
 {
     public class Translate
     {
         private const string Url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=";
-        private string Request;
+        private string Request { get; set; } = String.Empty;
+
+        private struct Block
+        {
+            public object[] Data { get; }
+            public int Elements { get => Data.Length; }
+            public int Blocks
+            {
+                get
+                {
+                    int c = 0;
+                    foreach (object _data in Data)
+                        if (_data is Block)
+                            c++;
+                    return c;
+                }
+            }
+            public Block this[int x]
+            {
+                get
+                {
+                    if (x > Blocks)
+                        throw new IndexOutOfRangeException("Index out of range");
+                    List<Block> _blocks = new List<Block>();
+                    foreach(object _data in Data)
+                    {
+                        if (_data is Block)
+                        {
+                            Block block = _data as Block? ?? throw new Exception("Cannot Parse the block at the given index");
+                            _blocks.Add(block);
+                        }
+                    }
+                    return _blocks[x];
+                }
+            }
+
+
+            public Block(string data)
+            {
+                if (!IsValidData(data))
+                    throw new ArgumentException("Invalid data string", "data");
+                //int elements = data.Count(c => c == '[') + data.Count(c => c == ',')*2;
+                //Data = new object[elements];
+                List<object> ldata = new List<object>() { null };                
+                Queue<char> vs = new Queue<char>(data.ToCharArray());
+
+                //int datai = 0;
+                while (vs.Count > 0)
+                {
+                    char @char = vs.Dequeue();
+                    switch (@char)
+                    {
+                        case '[':
+                            string nblock = new string(vs.ToArray());
+                            int end = 0;
+                            for (int n = nblock.Count(f => f == '[') + 1; n != 0; end++)
+                                if (nblock[end] == ']')
+                                    n--;
+                            vs = new Queue<char>(nblock.Substring(end));
+                            //ldata[datai] = new Block(nblock.Substring(0, nblock.LastIndexOf(']')));
+                            ldata[ldata.Count - 1] = new Block(nblock.Substring(0, end - 1));
+                            break;
+                        case ',':
+                            //datai++
+                            ldata.Add(null);
+                            continue;
+                        case ']':
+                            Data = ldata.ToArray();
+                            return;
+                        case '"':
+                            do
+                            {
+                                @char = vs.Peek();
+                                switch(@char)
+                                {
+                                    case '\\':
+                                        @char = vs.Dequeue();
+                                        break;
+                                    case '"':
+                                        continue;
+                                    default:
+                                        @char = vs.Dequeue();
+                                        break;
+                                }
+                                //Data[datai] = String.Concat(Data[datai], @char);
+                                ldata[ldata.Count - 1] = String.Concat(ldata[ldata.Count - 1], @char == '\\' ? vs.Dequeue() : @char);
+                            }
+                            while (vs.Peek() != '"');
+                            vs.Dequeue();
+                            break;
+                        default:
+                            //Data[datai] = String.Concat(Data[datai], @char);
+                            ldata[ldata.Count - 1] = String.Concat(ldata[ldata.Count - 1], @char);
+                            break;
+                    }
+
+                }
+
+                Data = ldata.ToArray();
+            }
+         
+            private static bool IsValidData(string data)
+            {
+                if (data == String.Empty)
+                    return false;
+                if ((data.Count(c => c == '[') + data.Count(c => c == ']')) % 2 != 0)
+                    return false;
+                if (data.Count(c => c == '"') % 2 != 0)
+                    return false;
+                return true;
+            }
+        }
 
         public class Language
         {
@@ -53,33 +165,9 @@ namespace GoogleTranslateApi
 
         public string Text(string text)
         {
-            text = Download(text.Replace('\x22', '\x27'));
-            // Variables
-            StringBuilder @string = new StringBuilder();
-            int StartTxt, EndTxt;
-            int BlocksStart, BlocksEnd;
-            int BlocksNumbers = 0;
-            // Set Variables
-            StartTxt = text.IndexOf('\x5B'); EndTxt = text.LastIndexOf('\x5D');
-            BlocksStart = text.IndexOf('\x5B', StartTxt + 1); BlocksEnd = text.LastIndexOf('\x5D', EndTxt - 1);
-            for (int x = 0; x < text.Substring(BlocksStart, BlocksEnd - BlocksStart).Length; x++)
-                if (text.Substring(BlocksStart + 1, BlocksEnd - BlocksStart)[x] == '\x5B')
-                    BlocksNumbers++;
-            //
-            text = text.Substring(BlocksStart, BlocksEnd - BlocksStart);
-            for (int x = 0; x < BlocksNumbers; x++)
-            {
-                int StartBlock = text.IndexOf('\x5B');
-                int EndBlock = text.IndexOf('\x5D', StartBlock + 1);
-                string sub = text.Substring(StartBlock, EndBlock - StartBlock);
-                int Subindex = sub.IndexOf('\x22');
-                sub = sub.Substring(Subindex + 1, sub.IndexOf('\x22', Subindex + 1) - (Subindex + 1));
-                @string.Append(sub.Replace('\x27', '\x22'));
-                text = text.Substring(EndBlock + 1);
-            }
-            //int index = text.IndexOf('\x22');
-            //text = text.Substring(index+1, text.IndexOf('\x22', index+1) - index );
-            return @string.ToString();
+            text = Download(text);
+            Block block = new Block(text);
+            return block[0][0][0].Data[0].ToString();
         }
     }
 }
