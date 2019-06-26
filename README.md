@@ -1,5 +1,5 @@
 # GoogleTranslateApi
-Api for Google Translate
+Free Api for Google Translate
 
 ## Usage:
 
@@ -9,5 +9,5 @@ Api for Google Translate
 Translate translate = new Translate(Translate.Language.Portuguese, Translate.Language.English);
 
 // This Function Will return the Translated Text
-string TranslatedText = translate.Text();
+string TranslatedText = translate.Text("Olá Mundo");
 ```
