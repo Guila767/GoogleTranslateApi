@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // conjunto de atributos. Altere estes valores de atributo para modificar as informações
 // associada a um assembly.
 [assembly: AssemblyTitle("GoogleTranslateApi")]
-[assembly: AssemblyDescription("Implementação Da Api do Google Translate")]
+[assembly: AssemblyDescription("Implementation of Google Translate API")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Guila767")]
 [assembly: AssemblyProduct("GoogleTranslateApi")]
