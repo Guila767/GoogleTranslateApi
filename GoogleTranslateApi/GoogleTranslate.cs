@@ -68,9 +68,14 @@ namespace GoogleTranslateApi
                         case '[':
                             string nblock = new string(vs.ToArray());
                             int end = 0;
-                            for (int n = nblock.Count(f => f == '[') + 1; n != 0; end++)
-                                if (nblock[end] == ']')
+                            /* FIXED - find the correct end*/
+                            for (int n = 1; n != 0; end++)
+                            {
+                                if (nblock[end] == '[')
+                                    n++;
+                                else if (nblock[end] == ']')
                                     n--;
+                            }
                             vs = new Queue<char>(nblock.Substring(end));
                             //ldata[datai] = new Block(nblock.Substring(0, nblock.LastIndexOf(']')));
                             ldata[ldata.Count - 1] = new Block(nblock.Substring(0, end - 1));
@@ -165,10 +170,17 @@ namespace GoogleTranslateApi
 
         public string Text(string text)
         {
+            /* FIXED - Gets the multiples blocks that can be received */
+            string Dest = string.Empty;
+            
             text = Download(text);
-            Block Datablock = (new Block(text))[0][0][0];
-            //string Source = Datablock.Data[1] == null ? string.Empty : Datablock.Data[1].ToString();
-            string Dest = Datablock.Data[0] == null ? string.Empty : Datablock.Data[0].ToString();
+            Block Datablock = new Block(text);
+            for(int n = 0; n < Datablock[0][0].Blocks; n++)
+            {
+                Block splitData = Datablock[0][0][n];
+                Dest = String.Concat(Dest, splitData.Data[0]);
+            }
+            //string Source = Datablock[0][0][0].Data[1] == null ? string.Empty : Datablock[0][0][0].Data[1].ToString();
             return Dest;
         }
     }
