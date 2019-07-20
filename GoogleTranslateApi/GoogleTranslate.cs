@@ -34,15 +34,15 @@ namespace GoogleTranslateApi
             {
                 get
                 {
-                    if (x > Blocks)
+                    if (x > Blocks - 1)
                         throw new IndexOutOfRangeException("Index out of range");
                     List<Block> _blocks = new List<Block>();
                     foreach(object _data in Data)
                     {
                         if (_data is Block)
                         {
-                            Block block = _data as Block? ?? throw new Exception("Cannot Parse the block at the given index");
-                            _blocks.Add(block);
+                            //Block block = _data as Block? ?? throw new Exception("Cannot Parse the block at the given index");
+                            _blocks.Add((Block)_data);
                         }
                     }
                     return _blocks[x];
@@ -170,10 +170,10 @@ namespace GoogleTranslateApi
 
         public string Text(string text)
         {
-            /* FIXED - Gets the multiples blocks that can be received */
             string Dest = string.Empty;
-            
-            text = Download(text);
+            /* FIXED - Remove '\n' (Line feed/new line char) */
+            text = (Download(text)).Replace("\n", "");
+            /* FIXED - Gets the multiples blocks that can be received */
             Block Datablock = new Block(text);
             for(int n = 0; n < Datablock[0][0].Blocks; n++)
             {
