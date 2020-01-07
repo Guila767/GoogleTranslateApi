@@ -2,11 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 using System.Net;
-using System.ComponentModel;
-using System.IO;
 
 namespace GoogleTranslateApi
 {
@@ -49,17 +45,18 @@ namespace GoogleTranslateApi
                 }
             }
 
-
+            /// <summary>
+            /// Creates a Block class 
+            /// </summary>
+            /// <param name="data">The data string to be parsed</param>
+            /// <exception cref="ArgumentException"></exception>
             public Block(string data)
             {
                 if (!IsValidData(data))
                     throw new ArgumentException("Invalid data string", "data");
-                //int elements = data.Count(c => c == '[') + data.Count(c => c == ',')*2;
-                //Data = new object[elements];
                 List<object> ldata = new List<object>() { null };                
                 Queue<char> vs = new Queue<char>(data.ToCharArray());
 
-                //int datai = 0;
                 while (vs.Count > 0)
                 {
                     char @char = vs.Dequeue();
@@ -77,11 +74,9 @@ namespace GoogleTranslateApi
                                     n--;
                             }
                             vs = new Queue<char>(nblock.Substring(end));
-                            //ldata[datai] = new Block(nblock.Substring(0, nblock.LastIndexOf(']')));
                             ldata[ldata.Count - 1] = new Block(nblock.Substring(0, end - 1));
                             break;
                         case ',':
-                            //datai++
                             ldata.Add(null);
                             continue;
                         case ']':
@@ -102,14 +97,12 @@ namespace GoogleTranslateApi
                                         @char = vs.Dequeue();
                                         break;
                                 }
-                                //Data[datai] = String.Concat(Data[datai], @char);
                                 ldata[ldata.Count - 1] = String.Concat(ldata[ldata.Count - 1], @char == '\\' ? vs.Dequeue() : @char);
                             }
                             while (vs.Peek() != '"');
                             vs.Dequeue();
                             break;
                         default:
-                            //Data[datai] = String.Concat(Data[datai], @char);
                             ldata[ldata.Count - 1] = String.Concat(ldata[ldata.Count - 1], @char);
                             break;
                     }
@@ -121,8 +114,6 @@ namespace GoogleTranslateApi
          
             private static bool IsValidData(string data)
             {
-                if (data == String.Empty)
-                    return false;
                 if ((data.Count(c => c == '[') + data.Count(c => c == ']')) % 2 != 0)
                     return false;
                 if (data.Count(c => c == '"') % 2 != 0)
@@ -159,15 +150,21 @@ namespace GoogleTranslateApi
 
         private string Download(string text)
         {
-            WebClient web = new WebClient();
-            web.Encoding = Encoding.UTF8;
+            WebClient web = new WebClient
+            {
+                Encoding = Encoding.UTF8
+            };
             //web.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0");
             //web.Headers.Add(HttpRequestHeader.AcceptCharset, "UTF-8");
             Uri uri = new Uri(this.Request + Uri.EscapeUriString(text));
-            //web.DownloadFile(uri, "Tranlate.txt");
             return web.DownloadString(uri);
         }
 
+        /// <summary>
+        /// Returns the translated text
+        /// </summary>
+        /// <param name="text">The text to be translated</param>
+        /// <returns>A string that contains the translated text</returns>
         public string Text(string text)
         {
             string Dest = string.Empty;
@@ -180,7 +177,6 @@ namespace GoogleTranslateApi
                 Block splitData = Datablock[0][0][n];
                 Dest = String.Concat(Dest, splitData.Data[0]);
             }
-            //string Source = Datablock[0][0][0].Data[1] == null ? string.Empty : Datablock[0][0][0].Data[1].ToString();
             return Dest;
         }
     }
