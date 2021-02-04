@@ -1,6 +1,0 @@
-C:\Users\guila\source\GitClones\GoogleTranslateApi\GoogleTranslateApi\bin\Debug\GoogleTranslateApi.dll
-C:\Users\guila\source\GitClones\GoogleTranslateApi\GoogleTranslateApi\bin\Debug\GoogleTranslateApi.pdb
-C:\Users\guila\source\GitClones\GoogleTranslateApi\GoogleTranslateApi\obj\Debug\GoogleTranslateApi.csprojAssemblyReference.cache
-C:\Users\guila\source\GitClones\GoogleTranslateApi\GoogleTranslateApi\obj\Debug\GoogleTranslateApi.csproj.CoreCompileInputs.cache
-C:\Users\guila\source\GitClones\GoogleTranslateApi\GoogleTranslateApi\obj\Debug\GoogleTranslateApi.dll
-C:\Users\guila\source\GitClones\GoogleTranslateApi\GoogleTranslateApi\obj\Debug\GoogleTranslateApi.pdb
