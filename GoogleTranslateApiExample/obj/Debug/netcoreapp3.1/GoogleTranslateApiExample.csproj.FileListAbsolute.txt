@@ -1,0 +1,16 @@
+C:\Users\guila\source\GitClones\GoogleTranslateApi\GoogleTranslateApiExample\bin\Debug\netcoreapp3.1\GoogleTranslateApiExample.exe
+C:\Users\guila\source\GitClones\GoogleTranslateApi\GoogleTranslateApiExample\bin\Debug\netcoreapp3.1\GoogleTranslateApiExample.deps.json
+C:\Users\guila\source\GitClones\GoogleTranslateApi\GoogleTranslateApiExample\bin\Debug\netcoreapp3.1\GoogleTranslateApiExample.runtimeconfig.json
+C:\Users\guila\source\GitClones\GoogleTranslateApi\GoogleTranslateApiExample\bin\Debug\netcoreapp3.1\GoogleTranslateApiExample.runtimeconfig.dev.json
+C:\Users\guila\source\GitClones\GoogleTranslateApi\GoogleTranslateApiExample\bin\Debug\netcoreapp3.1\GoogleTranslateApiExample.dll
+C:\Users\guila\source\GitClones\GoogleTranslateApi\GoogleTranslateApiExample\bin\Debug\netcoreapp3.1\GoogleTranslateApiExample.pdb
+C:\Users\guila\source\GitClones\GoogleTranslateApi\GoogleTranslateApiExample\bin\Debug\netcoreapp3.1\GoogleTranslateApi.dll
+C:\Users\guila\source\GitClones\GoogleTranslateApi\GoogleTranslateApiExample\bin\Debug\netcoreapp3.1\GoogleTranslateApi.pdb
+C:\Users\guila\source\GitClones\GoogleTranslateApi\GoogleTranslateApiExample\obj\Debug\netcoreapp3.1\GoogleTranslateApiExample.csprojAssemblyReference.cache
+C:\Users\guila\source\GitClones\GoogleTranslateApi\GoogleTranslateApiExample\obj\Debug\netcoreapp3.1\GoogleTranslateApiExample.csproj.CoreCompileInputs.cache
+C:\Users\guila\source\GitClones\GoogleTranslateApi\GoogleTranslateApiExample\obj\Debug\netcoreapp3.1\GoogleTranslateApiExample.AssemblyInfoInputs.cache
+C:\Users\guila\source\GitClones\GoogleTranslateApi\GoogleTranslateApiExample\obj\Debug\netcoreapp3.1\GoogleTranslateApiExample.AssemblyInfo.cs
+C:\Users\guila\source\GitClones\GoogleTranslateApi\GoogleTranslateApiExample\obj\Debug\netcoreapp3.1\GoogleTranslateApiExample.csproj.CopyComplete
+C:\Users\guila\source\GitClones\GoogleTranslateApi\GoogleTranslateApiExample\obj\Debug\netcoreapp3.1\GoogleTranslateApiExample.dll
+C:\Users\guila\source\GitClones\GoogleTranslateApi\GoogleTranslateApiExample\obj\Debug\netcoreapp3.1\GoogleTranslateApiExample.pdb
+C:\Users\guila\source\GitClones\GoogleTranslateApi\GoogleTranslateApiExample\obj\Debug\netcoreapp3.1\GoogleTranslateApiExample.genruntimeconfig.cache
