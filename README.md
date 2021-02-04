@@ -4,10 +4,13 @@ Free Api for Google Translate
 ## Usage:
 
 ``` C#
-// Constructor Parameters
-// Translate(SourceLanguage, TargetLanguage);
-Translate translate = new Translate(Translate.Language.Portuguese, Translate.Language.English);
+// Namespace: GoogleTranslateApi
+// Constructor Parameters: GoogleTranslator(SourceLanguage, TargetLanguage);
+GoogleTranslator translate = new GoogleTranslator(Language.Portuguese, Language.English);
 
 // This Function Will return the Translated Text
 string TranslatedText = translate.Text("Olá Mundo");
+
+// In a assynchronous context
+string TranslatedText = await translate.GetTextAsync("Olá Mundo");
 ```
