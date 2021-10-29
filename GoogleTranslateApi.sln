@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30002.166
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31808.319
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleTranslateApi", "GoogleTranslateApi\GoogleTranslateApi.csproj", "{43CF1509-AB52-495C-A598-946A71451045}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleTranslateApiExample", "GoogleTranslateApiExample\GoogleTranslateApiExample.csproj", "{A635C136-A9F8-4A68-B6F1-AD4030AAC57F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoogleTranslateApiExample", "GoogleTranslateApiExample\GoogleTranslateApiExample.csproj", "{A635C136-A9F8-4A68-B6F1-AD4030AAC57F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

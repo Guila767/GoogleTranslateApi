@@ -190,7 +190,7 @@ namespace GoogleTranslateApi
             source = (await DownloadAsync(source)).Replace("\n", "");
 
             var dataBlock = new Block(source);
-            for (int n = 0; n < dataBlock.Blocks; n++)
+            for (int n = 0; n < dataBlock[0][0].Blocks; n++)
             {
                 Block splitData = dataBlock[0][0][n];
                 result = string.Concat(result, splitData.Data[0]);

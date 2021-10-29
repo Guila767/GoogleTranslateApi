@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "GoogleTranslateApiExample": {
+      "commandName": "Project",
+      "commandLineArgs": "en pt"
+    }
+  }
+}

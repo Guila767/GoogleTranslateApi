@@ -43,17 +43,4 @@ namespace GoogleTranslateApiExample
             }
         }
     }
-    //static class TextWriterEx
-    //{
-    //    public static async Task OnTextReadAsync(this TextReader textReader, Action<string> action, CancellationToken cancellationToken)
-    //    {
-    //        while (!cancellationToken.IsCancellationRequested)
-    //        {
-    //            var r = await textReader.ReadLineAsync();
-    //            action.Invoke(r);
-    //        }
-    //    }
-
-    //    public static async Task OnTextReadAsync(this TextReader textReader, Action<string> action) => await OnTextReadAsync(textReader, action, CancellationToken.None);
-    //}
 }
